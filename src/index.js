@@ -36,7 +36,17 @@ document.addEventListener('click', (e) => {
         });
     }
 
-    // const util
+    const renameBtn = e.target.closest('#rename');
+    if (renameBtn) {
+        let projectID = renameBtn.getAttribute('project-id');
+
+    }
+
+    const deleteBtn = e.target.closest('#delete');
+    if (deleteBtn) {
+        let projectID = deleteBtn.getAttribute('project-id');
+        ui.deleteProject(projectID);
+    }
 });
 
 

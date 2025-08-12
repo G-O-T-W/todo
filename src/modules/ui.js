@@ -23,7 +23,7 @@ export default class UI{
     loadProjects(){
         const projectsList = document.querySelector('.projects-list');
         // Display user created projectsList
-        for(const project of this.projects){
+        for(const [idx, project] of this.projects.entries()){
             // Create a list item for project
             const li = document.createElement('li');
             li.setAttribute('project-id', project.ID);
@@ -70,6 +70,8 @@ export default class UI{
                 // Group the logo and link together
                 const div = document.createElement('div');
                 div.classList.add('util');
+                div.id = `${util[0].toLowerCase()}`;
+                div.setAttribute('project-id', project.ID);
                 div.append(span, a);
 
                 dropdown.appendChild(div);
@@ -89,19 +91,25 @@ export default class UI{
     }
 
     deleteProject(projectID){
+        if(projectID == this.projects[0].ID){
+            alert("Cannot Delete Default Folder");
+            return;
+        }
+
         // Delete the project from list of projects
         for(const [idx, project] of this.projects.entries()){
-            if(project.ID = projectID){
-                this.projects.splice(idx, 1)
+            if(project.ID == projectID){
+                this.projects.splice(idx, 1);
                 break;
             }
         }
         // Remove list item from sidebar
-        const projects = document.querySelector('.projects-list');
+        const projectsList = document.querySelector('.projects-list');
         const projectItems = document.querySelectorAll('.projects > li');
         for(const project of projectItems){
             if(project.getAttribute('project-id') == projectID){
-                projects.removeChild(project);
+                console.log(`Matched${project.getAttribute('project-id')}`)
+                projectsList.removeChild(project);
                 break;
             }
         }
