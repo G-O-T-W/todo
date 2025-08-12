@@ -79,6 +79,29 @@ header h1 {
   font-family: 'EB Garamond', monospace;
 }
 
+.create-todo {
+  margin: 16px 0;
+}
+
+.create-todo:hover button {
+  cursor: pointer;
+}
+
+.create-todo button {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  border-radius: 10px;
+  border: none;
+  background-color: var(--accent-color);
+  color: var(--primary);
+  width: 100%;
+}
+
+.create-todo p {
+  font-size: 1rem;
+}
+
 nav {
   flex: 1;
 }
