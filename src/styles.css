@@ -45,8 +45,8 @@ h1, h2, h3, h4, h5, h6 {
 
 :root {
   --accent-color: #4b0082;
-  --sidebar-bg-color: #d9d9d94f;
-  --menu-highlight-color: #b9b9b9;
+  --sidebar-bg-color: #f5f4f4;
+  --menu-highlight-color: #d7d7d7;
   --menu-option-highlight-color: #aaaaaa;
   --primary: white;
   --secondary: black;
@@ -90,17 +90,20 @@ nav ul {
 }
 
 nav ul li {
-  border: 2px solid transparent;
   padding: 2px 4px;
   display: flex;
-  gap: 2px;
   align-items: center;
+  width: 100%; 
 }
 
-nav ul li:hover {
+nav li:hover {
   cursor: pointer;
   background-color: var(--menu-highlight-color);
   border-radius: 10px;
+}
+
+.views li {
+  gap: 8px;
 }
 
 /* .sidebar ul li:hover .menu-icon{
@@ -108,11 +111,65 @@ nav ul li:hover {
 
 } */
 
-nav ul button {
-  border: none;
+.projects-list li {
+   position: relative; /* Add this so dropdown is positioned relative to the list item */
+  justify-content: space-between;
+  align-items: center;
+}
+
+.projects-list li .to-left {
+  display: flex;
+  gap: 8px;
+}
+
+.projects-list li .drop-btn{
   background-color: transparent;
-  text-align: left;
-  width: 100%; 
+  border: none;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.projects-list li .drop-btn:hover {
+  background-color: var(--menu-option-highlight-color);
+}
+
+/* Dropdown styling */
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--sidebar-bg-color);
+  min-width: 80px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  padding: 4px;
+  border-radius: 10px;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: var(--secondary);
+  text-decoration: none;
+  display: block;
+}
+
+
+/* Style Util Buttons */
+.util{
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 4px 8px;
+}
+
+/* Change color of utils on hover */
+.util:hover {
+  background-color: var(--menu-highlight-color);
+  border-radius: 10px;
 }
 
 nav .add-project {

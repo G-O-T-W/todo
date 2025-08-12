@@ -20,26 +20,75 @@ export default class UI{
         
     }
 
-    updateSidebar(){
-        this.resetSidebar()
+    loadProjects(){
         const projectsList = document.querySelector('.projects-list');
         // Display user created projectsList
         for(const project of this.projects){
+            // Create a list item for project
             const li = document.createElement('li');
             li.setAttribute('project-id', project.ID);
-            // Add hashtag icon dynamically besides projectsList
+
+            // Add hashtag icon  besides project name
             const span = document.createElement('span');
             span.classList.add('menu-icon', 'material-symbols-outlined');
             span.textContent = 'tag';
-            const button = document.createElement('button');
-            button.textContent = `${project.name}`;
-            li.append(span, button);
+
+            // Add project name
+            const p = document.createElement('p');
+            p.textContent = `${project.name}`;
+
+            // Group icon and name together
+            const div = document.createElement('div');
+            div.classList.add('to-left');
+            div.append(span, p);
+
+            // Add util button
+            const dropBtn = document.createElement('button');
+            dropBtn.classList.add('drop-btn');
+            const utilButtonIcon = document.createElement('span');
+            utilButtonIcon.classList.add('material-symbols-outlined');
+            utilButtonIcon.textContent = 'more_horiz';
+            dropBtn.appendChild(utilButtonIcon);
+
+            // Create the dropdown
+            const dropdown = document.createElement("div");
+            dropdown.classList.add("dropdown-content");
+
+            // Create the links
+            const utils = [["Rename", "edit"], ["Delete", "delete"]];
+            utils.forEach((util) => {
+                // Create util logo
+                const span = document.createElement('span');
+                span.classList.add('material-symbols-outlined');
+                span.textContent = util[1];
+
+                // Create util link
+                const a = document.createElement("a");
+                a.href = "#";
+                a.textContent = util[0];
+
+                // Group the logo and link together
+                const div = document.createElement('div');
+                div.classList.add('util');
+                div.append(span, a);
+
+                dropdown.appendChild(div);
+            });
+
+            // Append the dropdown to the body (or another container)
+        
+
+            li.append(div, dropBtn, dropdown);
             projectsList.appendChild(li);
         }
     }
 
-    deleteProject(projectID){
+    updateSidebar(){
+        this.resetSidebar();
+        this.loadProjects();
+    }
 
+    deleteProject(projectID){
         // Delete the project from list of projects
         for(const [idx, project] of this.projects.entries()){
             if(project.ID = projectID){
@@ -56,6 +105,7 @@ export default class UI{
                 break;
             }
         }
+        this.updateSidebar();
     }
 
     renameProject(name, projectID){
