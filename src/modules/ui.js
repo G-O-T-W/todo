@@ -1,5 +1,4 @@
 import Project from './projects';
-
 export default class UI{
     constructor(){
         this.projects = [];
@@ -13,42 +12,50 @@ export default class UI{
     }
 
     resetSidebar(){
-        const menu = document.querySelector('.sidebar > nav > ul');
-        const menuItems = document.querySelectorAll('.sidebar > nav > ul > li');
-        menuItems.forEach((menuItem, index) => {
-            // Exclude the four static projects Inbox, Today, Upcoming, Overdue
-            if(index >= 4) menu.removeChild(menuItem);
+        const projectsList = document.querySelector('.projects-list');
+        const projectItems = document.querySelectorAll('.projects-list > li');
+        projectItems.forEach((project) => {
+           projectsList.removeChild(project);
         });
         
     }
 
     updateSidebar(){
         this.resetSidebar()
-        const menu = document.querySelector('.sidebar > nav > ul');
-        // Display user created projects
+        const projectsList = document.querySelector('.projects-list');
+        // Display user created projectsList
         for(const project of this.projects){
-            const menuItem = document.createElement('li');
-            menuItem.setAttribute('project-id', project.ID);
-            // Add hashtag icon dynamically besides projects
+            const li = document.createElement('li');
+            li.setAttribute('project-id', project.ID);
+            // Add hashtag icon dynamically besides projectsList
             const span = document.createElement('span');
             span.classList.add('menu-icon', 'material-symbols-outlined');
             span.textContent = 'tag';
             const button = document.createElement('button');
             button.textContent = `${project.name}`;
-            menuItem.append(span, button);
-            menu.appendChild(menuItem);
+            li.append(span, button);
+            projectsList.appendChild(li);
         }
     }
 
     deleteProject(projectID){
-        const menu = document.querySelector('.sidebar > nav > ul');
-        for(const project of projects){
-            if(project.ID == projectID){
-                project.todos = [];
 
+        // Delete the project from list of projects
+        for(const [idx, project] of this.projects.entries()){
+            if(project.ID = projectID){
+                this.projects.splice(idx, 1)
+                break;
             }
         }
-
+        // Remove list item from sidebar
+        const projects = document.querySelector('.projects-list');
+        const projectItems = document.querySelectorAll('.projects > li');
+        for(const project of projectItems){
+            if(project.getAttribute('project-id') == projectID){
+                projects.removeChild(project);
+                break;
+            }
+        }
     }
 
     renameProject(name, projectID){
