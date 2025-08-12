@@ -39,104 +39,116 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Font Imports */
-@import url('https://fonts.googleapis.com/css2?family=Emilys+Candy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
 
 /* Custom CSS */
 
 :root {
-  --primary-color: #F1BA88;
-  --secondary-color: #81e7af55;
-  --tertiary-color: #E9F5BE;
-  --border-color: #03A791;
+  --accent-color: #4b0082;
+  --sidebar-bg-color: #d9d9d94f;
+  --menu-highlight-color: #b9b9b9;
+  --menu-option-highlight-color: #aaaaaa;
+  --primary: white;
+  --secondary: black;
 }
 
 body {
   font-size: 62.5%;
   display: flex;
   height: 100vh;
-  flex-direction: column;
   font-family: monospace, serif;
-}
-
-ul {
-  list-style: none;
-}
-
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-image: linear-gradient(to top left, var(--primary-color),  #ffa755);
-  color: var(--tertiary-color);
-  padding: 32px 16px;
-
-}
-
-header h1 {
-  text-shadow: 2px 1px 5px black;
-  font-size: 3.2rem;
-  letter-spacing: 0.3rem;
-  font-family: "Emilys Candy", monospace;
-}
-
-header button {
-  font-size: 1.6rem;
-  border-radius: 50px;
-  padding: 8px 16px;
-  border: 4px solid var(--tertiary-color);
-  background-image: linear-gradient(to top left, var(--primary-color),  #ffa755);
-  color: var(--tertiary-color);
-}
-
-header button:hover {
-  border: 4px solid var(--border-color);
-  cursor: pointer;
-  text-shadow: 2px 1px 5px black;
-}
-
-#content {
-  flex: 1;
-  display: flex;
-  gap: 16px;
 }
 
 .sidebar {
   width: max(200px, 15vw);
-  background-color: var(--secondary-color);
+  background-color: var(--sidebar-bg-color);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
-.sidebar nav {
-  font-size: 1.6rem;
+header {
+  padding: 4px 2px;
 }
 
-.sidebar nav ul {
+header h1 {
+  text-align: center;
+  color: var(--accent-color);
+  font-size: 2.4rem;
+  font-family: 'EB Garamond', monospace;
+}
+
+nav {
+  flex: 1;
+}
+
+nav ul {
+  font-size: 1rem;
+  padding: 0;
   margin-bottom: 16px;
-  margin-top: 16px;
 }
 
-.sidebar nav ul button {
+nav ul li {
+  border: 2px solid transparent;
+  padding: 2px 4px;
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+nav ul li:hover {
+  cursor: pointer;
+  background-color: var(--menu-highlight-color);
+  border-radius: 10px;
+}
+
+/* .sidebar ul li:hover .menu-icon{
+  color: var(--primary) !important;
+
+} */
+
+nav ul button {
   border: none;
   background-color: transparent;
+  text-align: left;
+  width: 100%; 
 }
 
-.sidebar nav ul button:hover {
+nav .add-project {
+  display: flex;
+  justify-content: center;
+}
+
+nav .add-project-btn {
+  background-color: transparent;
+  border: none;
+  font-size: 2rem;
+  color: var(--secondary);
+  display: flex;
+  align-items: center;
+  border: 3px solid transparent;
+  height: 34px;
+  width: auto;
+  border-radius: 50%;
+}
+
+nav .add-project-btn:hover {
   cursor: pointer;
-  text-shadow: 1px 1px 5px black;
-}
-
-.sidebar nav h2 {
-  margin: 0 16px;
-}
-
-footer {
-  background-image: linear-gradient(to top left, var(--primary-color),  #ffa755);
+  border: 3px solid var(--accent-color);
+  color: var(--accent-color);
+  background-color: transparent;
 }
 
 footer p {
   text-align: center;
-  font-size: 1.2rem;
-  font-family: "Emilys Candy", monospace;
-  color: var(--tertiary-color);
-  text-shadow: 1px 1px 5px black;
+  font-size: 1rem;
+  font-family: monospace;
+  color: var(--accent-color);
   padding: 8px 0;
 }
+
+.main-content {
+  flex: 1;
+}
+

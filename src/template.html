@@ -5,31 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Did You?</title>
     <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <h1>Did You?</h1>
-        <button id="addTask">Add Task &plus;</button>
-    </header>
-    <div class="modal">
-        
-    </div>
-    <div id="content">
-        <div class="sidebar">
-            <nav>
-                <button>Inbox</button>
-                <button>Today</button>
-                <button>Upcoming</button>
-            </nav>
-        </div>
-        <div class="main-content">
-            <h1>Projects</h1>
-            <div class="cards-list"></div>
-        </div>
-    </div>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
-    <footer>
-        <p>GOTW &copy; 2025</p>
-    </footer>
-</body>
+</head>
+    <div class="sidebar">
+        <header>
+            <h1>To Do</h1>
+        </header>
+        <nav>
+            <ul class="views">
+                <li>
+                    <span class="menu-icon material-symbols-outlined">inbox</span>
+                    <button>Inbox</button>
+                </li>
+                <li>
+                    <span class="menu-icon material-symbols-outlined">today</span>
+                    <button>Today</button>
+                </li>
+                <li>
+                    <span class="menu-icon material-symbols-outlined">calendar_clock</span>
+                    <button>Upcoming</button>
+                </li>
+                <li>
+                    <span class="menu-icon material-symbols-outlined">alarm</span>
+                    <button>Overdue</button>
+                </li>
+            </ul>
+            
+            <div class="add-project"><button class="add-project-btn">&plus;</button></div>
+        </nav>
+        <footer>
+            <p>GOTW @ 2025</p>
+        </footer>
+    </div>
+    <div class="main-content">
+        <h2></h2>
+        <div class="cards-list"></div>
+
+    </div>
 </html>

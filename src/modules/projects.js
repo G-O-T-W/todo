@@ -18,11 +18,4 @@ export default class Project{
         this.todos = [];
         // remove project from the menu
     }
-
-    display(){
-        console.log("hi");
-        for(const todo of this.todos){
-            console.log(todo);
-        }
-    }
 }
