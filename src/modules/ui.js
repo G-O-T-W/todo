@@ -123,7 +123,16 @@ export default class UI{
         this.updateSidebar();
     }
 
+    resetTodoForm(){
+        const select = document.querySelector('.form-input select');
+        const options = document.querySelectorAll('.form-input select option');
+        options.forEach((option) => {
+            select.removeChild(option);
+        });
+    }
+
     updateTodoForm() {
+        this.resetTodoForm();
         const select = document.querySelector('.form-input select');
         for(const project of this.projects){
             const option = document.createElement('option');
@@ -141,7 +150,6 @@ export default class UI{
             } 
         }
         selectedProject.addTodo(todo);
-        console.log(selectedProject.todos);
     }
 
     
