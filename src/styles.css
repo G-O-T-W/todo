@@ -232,3 +232,74 @@ footer p {
   flex: 1;
 }
 
+#create-todo-dialog {
+  margin: auto;
+  border: none;
+  border-radius: 16px;
+  font-size: 1rem;
+  padding: 16px;
+  width: calc(20vw + 100px);
+}
+
+#create-todo-dialog .content {
+  gap: 8px;
+}
+
+::backdrop {
+  background-image: linear-gradient(
+    45deg,
+    var(--primary),
+    var(--secondary)
+  );
+  opacity: 0.45;
+}
+
+.form-input {
+  margin-bottom: 4px;
+  display: flex;
+  flex-direction: column;
+}
+
+form label, form input, form textarea {
+  display: block;
+  width: 100%;
+}
+
+form input, form textarea {
+    padding: 4px;
+}
+
+form textarea{
+  resize: none;
+  height: calc(3lh + 12px);
+}
+
+.form-input:has(:required) label::after {
+  content: "*";
+  color: red;
+  display: inline;
+  margin-left: 3px;
+  vertical-align: text-top;
+}
+
+.form-submit {
+  margin-top: 16px;
+  display: flex;
+  gap: 8px;
+}
+
+.form-submit input{
+  border-radius: 10px;
+  border: none;
+  background-color: var(--menu-highlight-color);
+}
+
+.form-submit input:hover {
+  cursor: pointer;
+}
+
+input[type="submit"] {
+  background-color: var(--accent-color);
+  color: var(--primary);
+}
+

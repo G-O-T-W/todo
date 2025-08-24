@@ -52,4 +52,47 @@
         <div class="cards-list"></div>
 
     </div>
+
+    <!-- Create Todo Dialog -->
+     <dialog id="create-todo-dialog" closedby="any">
+        <div class="content">
+            <form action="" method="dialog" class="create-todo-form">
+                <div class="form-input">
+                    <label for="project">Project:</label>
+                    <select id="project" name= "project">
+                        
+                    </select>
+                </div>
+
+                <div class="form-input">
+                    <label for="title">Title:</label>
+                    <input id="title" name= "title" type="text" required>
+                </div>
+                
+
+                <div class="form-input">
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="description" cols="40"></textarea>
+                </div>
+                
+
+                <div class="form-input">
+                    <label for="date">Date:</label>
+                    <input id="date" name="date" type="date" required>
+                </div>
+
+                <div class="form-input">
+                    <label for="priority">Priority:</label>
+                    <input id="priority" name="priority" type="number" min="1" max="5" value="1" required>
+                </div>
+
+                <div class="form-submit">
+                    <input type="button" value="Cancel">
+                    <input type="submit" value="Create">
+                </div>
+            </form>
+        </div>
+
+     </dialog>
+
 </html>

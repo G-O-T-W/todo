@@ -14,6 +14,7 @@ addProject.addEventListener('click', ()=> {
     ui.updateSidebar();
 });
 
+// Event Listeners for sidebar
 document.addEventListener('click', (e) => {
     // Find the closest ancestor with .util-btn (could be itself)
     const dropBtn = e.target.closest('.drop-btn');
@@ -49,9 +50,36 @@ document.addEventListener('click', (e) => {
     }
 });
 
+// Event Listeners for Create Todo
+
+document.addEventListener('click', (e) => {
+    const createTodoDialog = document.querySelector('#create-todo-dialog');
+    
+    const createTodoBtn = e.target.closest('.create-todo');
+    if (createTodoBtn) {
+        createTodoDialog.showModal();
+        // Dynamically add projects as option to select
+        
+    }
+    
+    const cancelBtn = e.target.closest('#create-todo-dialog input[type="button"]');
+    if (cancelBtn) {
+        createTodoDialog.close();
+    }
+});
+
+// Event Listener for form submission
+
+const todoForm = document.querySelector('#create-todo-dialog form');
+todoForm.addEventListener('submit', ()=> {
+    
+    todoForm.reset();
+});
+
+/** Form:
+ *  Project Name - options from ui.projects 
 
 
 
 
-
-
+*/
