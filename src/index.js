@@ -1,5 +1,5 @@
 import './styles.css';
-// import Todo from './modules/todos';
+import Todo from './modules/todos';
 // import Project from './modules/projects';
 import UI from './modules/ui';
 // import { format } from 'date-fns'
@@ -59,7 +59,7 @@ document.addEventListener('click', (e) => {
     if (createTodoBtn) {
         createTodoDialog.showModal();
         // Dynamically add projects as option to select
-        
+        ui.updateTodoForm();
     }
     
     const cancelBtn = e.target.closest('#create-todo-dialog input[type="button"]');
@@ -71,8 +71,19 @@ document.addEventListener('click', (e) => {
 // Event Listener for form submission
 
 const todoForm = document.querySelector('#create-todo-dialog form');
-todoForm.addEventListener('submit', ()=> {
+todoForm.addEventListener('submit', (e)=> {
+    const formData = new FormData(todoForm); // this refers to the form element
     
+    const projID = formData.get('project');
+    const title = formData.get('title');
+    const description = formData.get('description');
+    const date = formData.get('date');
+    const priority = formData.get('priority');
+    
+    const todo = new Todo(title, description, date, priority);
+
+    ui.createTodo(projID, todo);
+
     todoForm.reset();
 });
 

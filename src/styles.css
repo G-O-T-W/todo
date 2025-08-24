@@ -265,7 +265,7 @@ form label, form input, form textarea {
   width: 100%;
 }
 
-form input, form textarea {
+form input, form textarea, form select{
     padding: 4px;
 }
 

@@ -123,6 +123,27 @@ export default class UI{
         this.updateSidebar();
     }
 
+    updateTodoForm() {
+        const select = document.querySelector('.form-input select');
+        for(const project of this.projects){
+            const option = document.createElement('option');
+            option.textContent = project.name;
+            option.value = project.ID;
+            select.appendChild(option);
+        }
+    }
+
+    createTodo(projID, todo) {
+        let selectedProject;
+        for(const project of this.projects) {
+            if(project.ID == projID){
+                selectedProject = project;
+            } 
+        }
+        selectedProject.addTodo(todo);
+        console.log(selectedProject.todos);
+    }
+
     
 
 

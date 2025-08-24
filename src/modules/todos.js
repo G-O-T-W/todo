@@ -1,9 +1,9 @@
 export default class Todo {
-    constructor(title, dueDate=null, dscr=null, priority=null){
+    constructor(title, dscr, dueDate, priority){
         this.ID = crypto.randomUUID();
         this.title = title;
-        this.dueDate = dueDate;
         this.dscr = dscr;
+        this.dueDate = dueDate;
         this.priority = priority;
         this.isComplete = false;
     }
