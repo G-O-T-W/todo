@@ -12,6 +12,9 @@ const addProject = document.querySelector('.add-project-btn');
 addProject.addEventListener('click', ()=> {
     ui.createProject('New Project');
     ui.updateSidebar();
+    // Keep the current project activated 
+    h2 = document.querySelector('.main-content h2');
+    setProjectAsActive(h2.getAttribute('project-id'));
 });
 
 // Event Listeners for sidebar
@@ -83,32 +86,46 @@ todoForm.addEventListener('submit', (e)=> {
     const todo = new Todo(title, description, date, priority);
 
     ui.createTodo(projID, todo);
+    setProjectAsActive(projID);
+    ui.displayTodos(projID);
 
     todoForm.reset();
 });
 
-// Even Listener for Project Views
+// For setting the project as active and adding .active class 
 
-
-document.addEventListener('click', (e) => {
-    const li = e.target.closest('.projects-list li');
-    if (li) {
-        // remove active state from previously selected view
-        const items = document.querySelectorAll('.projects-list li');
+const setProjectAsActive = (projID) => {
+    let activeProject;
+    const items = document.querySelectorAll('.projects-list li');
         for(const item of items){
             if(item.classList.contains('active')){
                 item.classList.remove('active');
             }
+            if(item.getAttribute('project-id') == projID){
+                activeProject = item;
+            }
         }
         // set active state for selected view
-        li.classList.add('active');
+        activeProject.classList.add('active');
+};
 
-        // Display Todos on Screen
-        const projID = li.getAttribute('project-id')
+// Event Listener for Project Views
+
+document.addEventListener('click', (e) => {
+    const li = e.target.closest('.projects-list li');
+    if (li) {
+        const projID = li.getAttribute('project-id');
+        setProjectAsActive(projID);
         ui.displayTodos(projID);
     }
 });
 
+
+// For intial activation of Default Project
+let h2 = document.querySelector('.main-content h2');
+if (h2) {
+    setProjectAsActive(h2.getAttribute('project-id'));
+}
 /** Form:
  *  Project Name - options from ui.projects 
 

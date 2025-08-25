@@ -55,17 +55,20 @@ h1, h2, h3, h4, h5, h6 {
 body {
   font-size: 62.5%;
   display: flex;
-  height: 100vh;
+  height: 100%;
   font-family: monospace, serif;
+  ---sidebar-width: 300px;
 }
 
 .sidebar {
-  width: max(200px, 15vw);
+  width: var(---sidebar-width);
+  height: 100vh;
   background-color: var(--sidebar-bg-color);
+  flex-grow: 0;
+  flex-shrink: 0;
   padding: 8px;
   display: flex;
   flex-direction: column;
-  height: 100vh;
 }
 
 header {
@@ -83,7 +86,7 @@ header h1 {
   margin: 16px 0;
 }
 
-.create-todo:hover button {
+.create-todo:hover button, .actions button:hover, .top-row button:hover{
   cursor: pointer;
 }
 
@@ -209,6 +212,10 @@ nav li:hover {
   border-radius: 10px;
 }
 
+.util span {
+  color: var(--accent-color);
+}
+
 nav .add-project {
   display: flex;
   justify-content: center;
@@ -242,9 +249,157 @@ footer p {
   padding: 8px 0;
 }
 
+/* Main Todo Screen Styles */
+
 .main-content {
   flex: 1;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+.main-content h2 {
+  font-size: 2rem;
+  margin-bottom: 16px;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.actions button {
+  display: flex;
+  gap: 4px;
+  padding: 4px 8px;
+}
+
+.sort, .filter {
+  font-size: 1rem;
+  background-color: transparent;
+  border: 2px solid var(--menu-highlight-color);
+  border-radius: 5px;
+}
+
+.cards-list {
+  width: 100%;
+  max-width: 600px;
+}
+
+.card {
+  width: 100%;
+  border-bottom: 1px solid var(--menu-highlight-color);
+  padding: 8px 0;
+  display: grid;
+  grid-template-columns: 16px 1fr;
+  column-gap: 16px;
+  grid-template-rows: auto auto auto;
+}
+
+.checkbox-container {
+  grid-column: 1 / 2;
+  grid-row: 1 / -1;
+  display: flex;
+  align-items: start;
+}
+
+.checkbox-container input[type="checkbox"] {
+    position: relative;
+    top: 8px;
+    appearance: none;
+    margin: 0;
+    font: inherit;
+    color: var(--accent-color);
+    width: 2rem;  /* Fixed width */
+    aspect-ratio: 1 / 1; /* Fixed height */
+    border: 1px solid var(--accent-color);
+    border-radius: 50%;
+    transform: translateY(-1px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkbox-container input[type="checkbox"]::before {
+    content: "";
+    width: 0.8rem;   /* Fixed width of inner circle */
+    aspect-ratio: 1 /1;  /* Fixed height of inner circle */
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+}
+
+.checkbox-container input[type="checkbox"]:checked::before {
+    transform: scale(1);
+} 
+
+
+.top-row {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  padding-bottom: 8px;
+  display: flex;
+  justify-content: start;
+}
+
+.title {
+  font-size: 1.2rem;
+  font-weight: 500;
+} 
+
+.top-row button {
+  background: none;
+  border: none;
+  align-self: flex-start;
+}
+
+.copy-todo-btn {
+  margin-left: auto;
+  margin-right: 4px;
+}
+
+.description {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  /* overflow: hidden; */
+  /* text-overflow: ellipsis; */
+  /* text-wrap: nowrap; */
+  margin-bottom: 8px;
+  color: var(--menu-option-highlight-color);
+  font-size: 0.8rem;
+}
+
+.bottom-bar {
+  grid-column: 2 / 3;
+  display: flex;
+  justify-content: space-between;
+}
+
+.date {
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.priority {
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  color: var(--accent-color);
+}
+
+.priority span, .date span{
+  font-size: 1rem; 
+  /* change the size of icons */
+}
+
+
+
+/* Styles for Dialog Box */
 
 #create-todo-dialog {
   margin: auto;
