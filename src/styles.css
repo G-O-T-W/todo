@@ -117,12 +117,12 @@ nav ul li {
   display: flex;
   align-items: center;
   width: 100%; 
+  border-radius: 10px;
 }
 
 nav li:hover {
   cursor: pointer;
   background-color: var(--menu-highlight-color);
-  border-radius: 10px;
 }
 
 .views li {
@@ -140,12 +140,12 @@ nav li:hover {
   align-items: center;
 }
 
-.projects-list li .to-left {
+.to-left {
   display: flex;
   gap: 8px;
 }
 
-.projects-list li .drop-btn{
+.drop-btn{
   background-color: transparent;
   border: none;
   border-radius: 10px;
@@ -153,8 +153,22 @@ nav li:hover {
   align-items: center;
 }
 
-.projects-list li .drop-btn:hover {
+.drop-btn:hover {
   background-color: var(--menu-option-highlight-color);
+}
+
+.active {
+  background-color: var(--accent-color);
+  color: var(--primary);
+}
+
+.active:hover {
+  background-color: var(--accent-color);
+  color: var(--primary);
+}
+
+.active .drop-btn {
+  color: var(--primary);
 }
 
 /* Dropdown styling */

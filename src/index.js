@@ -87,6 +87,28 @@ todoForm.addEventListener('submit', (e)=> {
     todoForm.reset();
 });
 
+// Even Listener for Project Views
+
+
+document.addEventListener('click', (e) => {
+    const li = e.target.closest('.projects-list li');
+    if (li) {
+        // remove active state from previously selected view
+        const items = document.querySelectorAll('.projects-list li');
+        for(const item of items){
+            if(item.classList.contains('active')){
+                item.classList.remove('active');
+            }
+        }
+        // set active state for selected view
+        li.classList.add('active');
+
+        // Display Todos on Screen
+        const projID = li.getAttribute('project-id')
+        ui.displayTodos(projID);
+    }
+});
+
 /** Form:
  *  Project Name - options from ui.projects 
 
