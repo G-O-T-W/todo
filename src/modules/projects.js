@@ -1,21 +1,21 @@
-export default class Project{
-    constructor(name){
-        this.ID = crypto.randomUUID();
-        this.name = name;
-        this.todos = [];
-    }
-    
-    addTodo(todo){
-        this.todos.push(todo);
-    }
+export default class Project {
+  constructor(name) {
+    this.ID = crypto.randomUUID();
+    this.name = name;
+    this.todos = [];
+  }
 
-    rename(name){
-        this.name = name;
-    }
+  addTodo(todo) {
+    this.todos.push(todo);
+  }
 
-    delete(){
-        // delete all todos
-        this.todos = [];
-        // remove project from the menu
-    }
+  rename(name) {
+    this.name = name;
+  }
+
+  delete() {
+    // delete all todos
+    this.todos = [];
+    // remove project from the menu
+  }
 }
