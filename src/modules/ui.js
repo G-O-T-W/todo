@@ -167,14 +167,16 @@ export default class UI {
   }
 
   clearScreen() {
-    const title = document.querySelector(".main-content > h2");
-    title.textContent = "";
-
-    const cardsList = document.querySelector(".cards-list");
-    const cards = document.querySelectorAll(".card");
-    cards.forEach((card) => {
-      cardsList.removeChild(card);
-    });
+    // const title = document.querySelector(".main-content > h2");
+    // title.textContent = "";
+    //
+    // const cardsList = document.querySelector(".cards-list");
+    // const cards = document.querySelectorAll(".card");
+    // cards.forEach((card) => {
+    //   cardsList.removeChild(card);
+    // });
+    const cards = document.querySelector(".cards-list");
+    cards.innerHTML = "";
   }
 
   displayTodos(projID) {
@@ -186,13 +188,14 @@ export default class UI {
         break;
       }
     }
+
     const h2 = document.querySelector(".main-content h2");
     h2.textContent = `# ${currentProject.name}`;
     // Add data attribute to h2 to hold project ID so that while creating todos current project automatically gets selected in the options.
     h2.setAttribute("project-id", currentProject.ID);
 
     const cards = document.querySelector(".cards-list");
-    for (const todo of currentProject.todos) {
+    currentProject.todos.forEach((todo) => {
       // Create the todo card and add class and identifier
       const card = document.createElement("div");
       card.classList.add("card");
@@ -205,26 +208,32 @@ export default class UI {
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
       checkbox.name = "checkbox-input-complete";
+      checkbox.addEventListener("click", this.handleCheckboxClick);
       checkbox_container.appendChild(checkbox);
 
       // Create top row
       const top_row = document.createElement("div");
       top_row.classList.add("top-row");
+      // title
       const title = document.createElement("div");
       title.classList.add("title");
       title.textContent = todo.title;
+      // Edit todo btn
       const edit_todo_btn = document.createElement("button");
       edit_todo_btn.classList.add("edit-todo-btn");
       const edit_logo = document.createElement("span");
       edit_logo.classList.add("menu-icon", "material-symbols-outlined");
       edit_logo.textContent = "edit";
       edit_todo_btn.appendChild(edit_logo);
+      edit_todo_btn.addEventListener("click", this.handleEditClick);
+      // Copy Todo btn
       const copy_todo_btn = document.createElement("button");
       copy_todo_btn.classList.add("copy-todo-btn");
       const copy_logo = document.createElement("span");
       copy_logo.classList.add("material-symbols-outlined");
       copy_logo.textContent = "content_copy";
       copy_todo_btn.appendChild(copy_logo);
+      copy_todo_btn.addEventListener("click", this.handleCopyClick);
       top_row.append(title, copy_todo_btn, edit_todo_btn);
 
       // Create description
@@ -255,17 +264,48 @@ export default class UI {
 
       card.append(checkbox_container, top_row, description, bottom_bar);
       cards.appendChild(card);
-    }
+    });
   }
 
-  clearTodo(todoID, projID) {
+  // Use arrow function so that `this` always refers to the class instance.
+  // This removes the need to bind in the constructor.
+  handleCopyClick = (e) => {
+    const card = e.target.closest(".card");
+    const todoID = card.getAttribute("todo-id");
+    const projectID = card.getAttribute("project-id");
+    this.copyTodoOnScreen(todoID, projectID);
+  };
+
+  handleEditClick = (e) => {
+    const card = e.target.closest(".card");
+    const todoID = card.getAttribute("todo-id");
+    const projectID = card.getAttribute("project-id");
+  };
+
+  handleCheckboxClick = (e) => {
+    const card = e.target.closest(".card");
+    const todoID = card.getAttribute("todo-id");
+    const projectID = card.getAttribute("project-id");
+    this.clearTodoOnScreen(todoID, projectID);
+  };
+
+  clearTodoOnScreen(todoID, projID) {
     for (const project of this.projects) {
       if (project.ID == projID) {
         project.completeTodo(todoID);
         break;
       }
     }
-    this.clearScreen();
+    this.displayTodos(projID);
+  }
+
+  copyTodoOnScreen(todoID, projID) {
+    for (const project of this.projects) {
+      if (project.ID == projID) {
+        project.copyTodo(todoID);
+        break;
+      }
+    }
     this.displayTodos(projID);
   }
 

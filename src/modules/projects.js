@@ -1,3 +1,5 @@
+import Todo from "./todos";
+
 export default class Project {
   constructor(name) {
     this.ID = crypto.randomUUID();
@@ -17,6 +19,22 @@ export default class Project {
     // delete all todos
     this.todos = [];
     // remove project from the menu
+  }
+
+  copyTodo(todoID) {
+    for (const [idx, todo] of this.todos.entries()) {
+      if (todoID == todo.ID) {
+        let duplicateTodo = new Todo(
+          todo.title,
+          todo.descr,
+          todo.dueDate,
+          todo.priority,
+        );
+        // Insert duplicate todo after the original
+        this.todos.splice(idx + 1, 0, duplicateTodo);
+        break;
+      }
+    }
   }
 
   completeTodo(todoID) {

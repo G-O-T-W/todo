@@ -12,7 +12,6 @@ addProject.addEventListener("click", () => {
   ui.createProject("New Project");
   ui.updateSidebar();
   // Keep the current project activated
-  h2 = document.querySelector(".main-content h2");
   setProjectAsActive(h2.getAttribute("project-id"));
 });
 
@@ -128,24 +127,3 @@ if (h2) {
   setProjectAsActive(h2.getAttribute("project-id"));
 }
 
-// Trigger for when todo gets checked
-document.addEventListener("click", (e) => {
-  if (
-    e.target.matches(
-      ".checkbox-container input",
-      ".edit-todo-btn",
-      ".copy-todo-btn",
-    )
-  ) {
-    const container = e.target.closest(".card");
-    if (e.target.matches(".checkbox-container input")) {
-      const todoID = container.getAttribute("todo-id");
-      const projectID = container.getAttribute("project-id");
-      ui.clearTodo(todoID, projectID);
-    }
-    if (e.target.matches(".edit-todo-btn")) {
-    }
-    if (e.target.matches(".copy-todo-btn")) {
-    }
-  }
-});
