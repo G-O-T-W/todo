@@ -18,4 +18,12 @@ export default class Project {
     this.todos = [];
     // remove project from the menu
   }
+
+  completeTodo(todoID) {
+    for (const [idx, todo] of this.todos.entries()) {
+      if (todoID == todo.ID) {
+        this.todos.splice(idx, 1);
+      }
+    }
+  }
 }
