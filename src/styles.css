@@ -1,6 +1,8 @@
 /* CSS Reset */
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -13,16 +15,29 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-img, picture, video, canvas, svg {
+img,
+picture,
+video,
+canvas,
+svg {
   display: block;
   max-width: 100%;
 }
 
-input, button, textarea, select {
+input,
+button,
+textarea,
+select {
   font: inherit;
 }
 
-p, h1, h2, h3, h4, h5, h6 {
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   overflow-wrap: break-word;
 }
 
@@ -30,16 +45,22 @@ p {
   text-wrap: pretty;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   text-wrap: balance;
 }
 
-#root, #__next {
+#root,
+#__next {
   isolation: isolate;
 }
 
 /* Font Imports */
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap");
 
 /* Custom CSS */
 
@@ -79,14 +100,16 @@ header h1 {
   text-align: center;
   color: var(--accent-color);
   font-size: 2.4rem;
-  font-family: 'EB Garamond', monospace;
+  font-family: "EB Garamond", monospace;
 }
 
 .create-todo {
   margin: 16px 0;
 }
 
-.create-todo:hover button, .actions button:hover, .top-row button:hover{
+.create-todo:hover button,
+.actions button:hover,
+.top-row button:hover {
   cursor: pointer;
 }
 
@@ -119,7 +142,7 @@ nav ul li {
   padding: 2px 4px;
   display: flex;
   align-items: center;
-  width: 100%; 
+  width: 100%;
   border-radius: 10px;
 }
 
@@ -138,7 +161,7 @@ nav li:hover {
 } */
 
 .projects-list li {
-   position: relative; /* Add this so dropdown is positioned relative to the list item */
+  position: relative; /* Add this so dropdown is positioned relative to the list item */
   justify-content: space-between;
   align-items: center;
 }
@@ -148,7 +171,7 @@ nav li:hover {
   gap: 8px;
 }
 
-.drop-btn{
+.drop-btn {
   background-color: transparent;
   border: none;
   border-radius: 10px;
@@ -184,7 +207,7 @@ nav li:hover {
   right: 0;
   background-color: var(--sidebar-bg-color);
   min-width: 80px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   padding: 4px;
   border-radius: 10px;
@@ -197,9 +220,8 @@ nav li:hover {
   display: block;
 }
 
-
 /* Style Util Buttons */
-.util{
+.util {
   display: flex;
   gap: 8px;
   align-items: center;
@@ -276,7 +298,8 @@ footer p {
   padding: 4px 8px;
 }
 
-.sort, .filter {
+.sort,
+.filter {
   font-size: 1rem;
   background-color: transparent;
   border: 2px solid var(--menu-highlight-color);
@@ -298,6 +321,12 @@ footer p {
   grid-template-rows: auto auto auto;
 }
 
+.card.removing {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: 300ms all ease;
+}
+
 .checkbox-container {
   grid-column: 1 / 2;
   grid-row: 1 / -1;
@@ -306,36 +335,35 @@ footer p {
 }
 
 .checkbox-container input[type="checkbox"] {
-    position: relative;
-    top: 8px;
-    appearance: none;
-    margin: 0;
-    font: inherit;
-    color: var(--accent-color);
-    width: 2rem;  /* Fixed width */
-    aspect-ratio: 1 / 1; /* Fixed height */
-    border: 1px solid var(--accent-color);
-    border-radius: 50%;
-    transform: translateY(-1px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: relative;
+  top: 8px;
+  appearance: none;
+  margin: 0;
+  font: inherit;
+  color: var(--accent-color);
+  width: 2rem; /* Fixed width */
+  aspect-ratio: 1 / 1; /* Fixed height */
+  border: 1px solid var(--accent-color);
+  border-radius: 50%;
+  transform: translateY(-1px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .checkbox-container input[type="checkbox"]::before {
-    content: "";
-    width: 0.8rem;   /* Fixed width of inner circle */
-    aspect-ratio: 1 /1;  /* Fixed height of inner circle */
-    transform: scale(0);
-    transition: 120ms transform ease-in-out;
-    background-color: var(--accent-color);
-    border-radius: 50%;
+  content: "";
+  width: 0.8rem; /* Fixed width of inner circle */
+  aspect-ratio: 1 /1; /* Fixed height of inner circle */
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  background-color: var(--accent-color);
+  border-radius: 50%;
 }
 
 .checkbox-container input[type="checkbox"]:checked::before {
-    transform: scale(1);
-} 
-
+  transform: scale(1);
+}
 
 .top-row {
   grid-column: 2 / 3;
@@ -348,7 +376,7 @@ footer p {
 .title {
   font-size: 1.2rem;
   font-weight: 500;
-} 
+}
 
 .top-row button {
   background: none;
@@ -392,12 +420,11 @@ footer p {
   color: var(--accent-color);
 }
 
-.priority span, .date span{
-  font-size: 1rem; 
+.priority span,
+.date span {
+  font-size: 1rem;
   /* change the size of icons */
 }
-
-
 
 /* Styles for Dialog Box */
 
@@ -415,11 +442,7 @@ footer p {
 }
 
 ::backdrop {
-  background-image: linear-gradient(
-    45deg,
-    var(--primary),
-    var(--secondary)
-  );
+  background-image: linear-gradient(45deg, var(--primary), var(--secondary));
   opacity: 0.45;
 }
 
@@ -429,16 +452,20 @@ footer p {
   flex-direction: column;
 }
 
-form label, form input, form textarea {
+form label,
+form input,
+form textarea {
   display: block;
   width: 100%;
 }
 
-form input, form textarea, form select{
-    padding: 4px;
+form input,
+form textarea,
+form select {
+  padding: 4px;
 }
 
-form textarea{
+form textarea {
   resize: none;
   height: calc(3lh + 12px);
 }
@@ -457,7 +484,7 @@ form textarea{
   gap: 8px;
 }
 
-.form-submit input{
+.form-submit input {
   border-radius: 10px;
   border: none;
   background-color: var(--menu-highlight-color);
@@ -471,4 +498,3 @@ input[type="submit"] {
   background-color: var(--accent-color);
   color: var(--primary);
 }
-

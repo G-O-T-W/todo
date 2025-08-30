@@ -286,7 +286,30 @@ export default class UI {
     const card = e.target.closest(".card");
     const todoID = card.getAttribute("todo-id");
     const projectID = card.getAttribute("project-id");
-    this.clearTodoOnScreen(todoID, projectID);
+    //  HACK: Using setTimeout to let the CSS :checked animation play
+    // before the DOM is updated or the element is removed.
+    // Without this delay, the checkbox visual effect wouldn't appear
+    // because the element is removed immediately.
+    card.classList.add("removing");
+    setTimeout(() => {
+      this.clearTodoOnScreen(todoID, projectID);
+      card.remove();
+    }, 500);
+    // This is the more robust approach
+    //   // 1. Update the state
+    // this.clearTodoFromProject(todoID, projectID);
+    //
+    // // 2. Trigger CSS animation
+    // card.classList.add("removing"); // e.g., opacity/translate transition
+    //
+    // // 3. Remove DOM element after transition ends
+    // card.addEventListener(
+    //   "transitionend",
+    //   () => {
+    //     card.remove();
+    //   },
+    //   { once: true } // ensures listener fires only once
+    // );
   };
 
   clearTodoOnScreen(todoID, projID) {
@@ -296,7 +319,6 @@ export default class UI {
         break;
       }
     }
-    this.displayTodos(projID);
   }
 
   copyTodoOnScreen(todoID, projID) {
