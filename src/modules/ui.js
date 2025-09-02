@@ -10,6 +10,7 @@ export default class UI {
     const todo = new Todo("Test", "test", "22-08-2025", "3");
     defaultProject.addTodo(todo);
     this.displayTodos(defaultProject.ID);
+
   }
 
   createProject(name) {
@@ -280,6 +281,19 @@ export default class UI {
     const card = e.target.closest(".card");
     const todoID = card.getAttribute("todo-id");
     const projectID = card.getAttribute("project-id");
+    const editTodoDialog = document.querySelector("#edit-todo-dialog");
+    editTodoDialog.showModal();
+    editTodoDialog.setAttribute('todo-id', todoID);
+    editTodoDialog.setAttribute('project-id', projectID);
+    
+    this.projects.forEach((project) => {
+      if(project.ID == projectID) {
+
+      }
+    });
+    // Set placeholders on screen
+    const title = document.querySelector("#edit-todo-dialog #title");
+
   };
 
   handleCheckboxClick = (e) => {
@@ -290,26 +304,27 @@ export default class UI {
     // before the DOM is updated or the element is removed.
     // Without this delay, the checkbox visual effect wouldn't appear
     // because the element is removed immediately.
-    card.classList.add("removing");
-    setTimeout(() => {
-      this.clearTodoOnScreen(todoID, projectID);
-      card.remove();
-    }, 500);
+    // card.classList.add("removing");
+    // setTimeout(() => {
+    //   this.clearTodoOnScreen(todoID, projectID);
+    //   card.remove();
+    // }, 500);
+
     // This is the more robust approach
-    //   // 1. Update the state
-    // this.clearTodoFromProject(todoID, projectID);
-    //
-    // // 2. Trigger CSS animation
-    // card.classList.add("removing"); // e.g., opacity/translate transition
-    //
-    // // 3. Remove DOM element after transition ends
-    // card.addEventListener(
-    //   "transitionend",
-    //   () => {
-    //     card.remove();
-    //   },
-    //   { once: true } // ensures listener fires only once
-    // );
+    // 1. Update the state
+    this.clearTodoOnScreen(todoID, projectID);
+
+    // 2. Trigger CSS animation
+    card.classList.add("removing"); // e.g., opacity/translate transition
+
+    // 3. Remove DOM element after transition ends
+    card.addEventListener(
+      "transitionend",
+      () => {
+        card.remove();
+      },
+      { once: true }, // ensures listener fires only once
+    );
   };
 
   clearTodoOnScreen(todoID, projID) {
