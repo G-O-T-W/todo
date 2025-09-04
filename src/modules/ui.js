@@ -306,7 +306,7 @@ export default class UI {
     description.value = currentTodo.dscr === undefined ? "" : `${currentTodo.dscr}`;
 
     const date = document.querySelector("#edit-todo-dialog #date");
-    date.value = `${currentTodo.date}`;
+    date.value = `${currentTodo.dueDate}`;
 
     const priority = document.querySelector("#edit-todo-dialog #priority");
     priority.value = `${currentTodo.priority}`;
