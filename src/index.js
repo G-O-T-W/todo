@@ -16,6 +16,7 @@ addProject.addEventListener("click", () => {
 });
 
 // Event Listeners for sidebar
+const renameProjectDialog = document.querySelector('#rename-project-dialog');
 const projectsList = document.querySelector('.projects-list');
 projectsList.addEventListener("click", (e) => {
   // Find the closest ancestor with .util-btn (could be itself)
@@ -43,10 +44,9 @@ projectsList.addEventListener("click", (e) => {
   const renameBtn = e.target.closest("#rename");
   if (renameBtn) {
     let projectID = renameBtn.getAttribute("project-id");
-    const dialog = document.querySelector('#rename-project-dialog');
     const form = document.querySelector("#rename-project-dialog form");
     form.setAttribute('project-id', projectID);
-    dialog.showModal();
+    renameProjectDialog.showModal();
   }
 
   const deleteBtn = e.target.closest("#delete");
@@ -65,6 +65,11 @@ renameProjectForm.addEventListener('submit', () => {
   ui.renameProject(newName, projectID);
   ui.updateSidebar();
 });
+
+const renameCancelBtn = document.querySelector('#rename-project-dialog input[type="button"]');
+renameCancelBtn.addEventListener('click', ()=> {
+  renameProjectDialog.close();
+})
 
 // Event Listeners for Create Todo
 const createTodoDialog = document.querySelector("#create-todo-dialog");
