@@ -198,6 +198,11 @@ nav li:hover {
   color: var(--primary);
 }
 
+.active .drop-btn:hover {
+  background-color: var(--primary);
+  color: var(--accent-color);
+}
+
 /* Dropdown styling */
 
 /* Dropdown Content (Hidden by Default) */
@@ -430,7 +435,8 @@ footer p {
 /* Styles for Dialog Box */
 
 #create-todo-dialog,
-#edit-todo-dialog {
+#edit-todo-dialog,
+#rename-project-dialog {
   background-color: var(--primary);
   margin: auto;
   border: none;
@@ -441,7 +447,8 @@ footer p {
 }
 
 #create-todo-dialog .content,
-#edit-todo-dialog .content {
+#edit-todo-dialog .content,
+#rename-project-dialog .content{
   display: flex;
   flex-direction: column;
   gap: 8px;

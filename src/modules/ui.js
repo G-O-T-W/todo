@@ -99,10 +99,11 @@ export default class UI {
   }
 
   deleteProject(projectID) {
-    if (projectID == this.projects[0].ID) {
-      alert("Cannot Delete Default Folder");
-      return;
-    }
+    // Don't allow default project to get deleted
+    // if (projectID == this.projects[0].ID) {
+    //   alert("Cannot Delete Default Folder");
+    //   return;
+    // }
 
     // Delete the project from list of projects
     for (const [idx, project] of this.projects.entries()) {
@@ -126,9 +127,10 @@ export default class UI {
 
   renameProject(name, projectID) {
     for (const project of this.projects) {
-      if (project.ID == projectID) project.name = name;
+      if (project.ID == projectID){
+        project.rename(name);
+      }
     }
-    this.updateSidebar();
   }
 
   resetTodoForm() {

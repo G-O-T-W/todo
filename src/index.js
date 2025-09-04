@@ -16,7 +16,8 @@ addProject.addEventListener("click", () => {
 });
 
 // Event Listeners for sidebar
-document.addEventListener("click", (e) => {
+const projectsList = document.querySelector('.projects-list');
+projectsList.addEventListener("click", (e) => {
   // Find the closest ancestor with .util-btn (could be itself)
   const dropBtn = e.target.closest(".drop-btn");
   if (dropBtn) {
@@ -42,6 +43,10 @@ document.addEventListener("click", (e) => {
   const renameBtn = e.target.closest("#rename");
   if (renameBtn) {
     let projectID = renameBtn.getAttribute("project-id");
+    const dialog = document.querySelector('#rename-project-dialog');
+    const form = document.querySelector("#rename-project-dialog form");
+    form.setAttribute('project-id', projectID);
+    dialog.showModal();
   }
 
   const deleteBtn = e.target.closest("#delete");
@@ -51,24 +56,27 @@ document.addEventListener("click", (e) => {
   }
 });
 
+const renameProjectForm = document.querySelector('#rename-project-dialog form');
+renameProjectForm.addEventListener('submit', () => {
+  const projectID = renameProjectForm.getAttribute('project-id');
+  const formData = new FormData(renameProjectForm);
+  const newName = formData.get('new-name');
+  console.log(newName);
+  ui.renameProject(newName, projectID);
+  ui.updateSidebar();
+});
+
 // Event Listeners for Create Todo
-document.addEventListener("click", (e) => {
-  const createTodoDialog = document.querySelector("#create-todo-dialog");
-
-  const createTodoBtn = e.target.closest(".create-todo");
-  if (createTodoBtn) {
-    createTodoDialog.showModal();
-    // Dynamically add projects as option to select
-    ui.updateTodoForm();
-  }
-
-  const cancelBtn = e.target.closest(
-    '#create-todo-dialog input[type="button"]',
-
-  );
-  if (cancelBtn) {
-    createTodoDialog.close();
-  }
+const createTodoDialog = document.querySelector("#create-todo-dialog");
+const createTodoBtn = document.querySelector('.create-todo')
+createTodoBtn.addEventListener("click", (e) => {
+  createTodoDialog.showModal();
+  // Dynamically add projects as option to select
+  ui.updateTodoForm();
+});
+const cancelBtn = document.querySelector('#create-todo-dialog input[type="button"]');
+cancelBtn.addEventListener('click', ()=> {
+  createTodoDialog.close();
 });
 
 
