@@ -194,7 +194,6 @@ export default class UI {
     h2.textContent = `# ${currentProject.name}`;
     // Add data attribute to h2 to hold project ID so that while creating todos current project automatically gets selected in the options.
     h2.setAttribute("project-id", currentProject.ID);
-
     const cards = document.querySelector(".cards-list");
     currentProject.todos.forEach((todo) => {
       // Create the todo card and add class and identifier
@@ -281,19 +280,59 @@ export default class UI {
     const card = e.target.closest(".card");
     const todoID = card.getAttribute("todo-id");
     const projectID = card.getAttribute("project-id");
+    let currentProject;
+    for(const project of this.projects){
+      if(project.ID == projectID) {
+        currentProject = project;
+        break;
+      }
+    }
+    // Get the right todo
+    let currentTodo;
+    for(const todo of currentProject.todos){
+      if(todo.ID == todoID) {
+        currentTodo = todo;
+        break;
+      }
+    }
+
     const editTodoDialog = document.querySelector("#edit-todo-dialog");
+
+    // Set placeholders on screen
+    const title = document.querySelector("#edit-todo-dialog #title");
+    title.value = `${currentTodo.title}`;
+
+    const description = document.querySelector("#edit-todo-dialog #description");
+    description.value = currentTodo.dscr === undefined ? "" : `${currentTodo.dscr}`;
+
+    const date = document.querySelector("#edit-todo-dialog #date");
+    date.value = `${currentTodo.date}`;
+
+    const priority = document.querySelector("#edit-todo-dialog #priority");
+    priority.value = `${currentTodo.priority}`;
+
+    // Add Event Listener
+    const cancelBtn = document.querySelector("#edit-todo-dialog input[type='button']");
+    cancelBtn.addEventListener('click', () => {
+      editTodoDialog.close();
+    });
+
+    const editForm = document.querySelector("#edit-todo-dialog form");
+    editForm.addEventListener('submit', (e) => {
+      const formData = new FormData(editForm);
+      const title = formData.get("title");
+      const description = formData.get("description");
+      const date = formData.get("date");
+      const priority = formData.get("priority");
+      currentProject.editTodo(currentTodo.ID, title, description, date, priority);
+      this.displayTodos(currentProject.ID);
+    });
+
+    // Show Modal
     editTodoDialog.showModal();
     editTodoDialog.setAttribute('todo-id', todoID);
     editTodoDialog.setAttribute('project-id', projectID);
     
-    this.projects.forEach((project) => {
-      if(project.ID == projectID) {
-
-      }
-    });
-    // Set placeholders on screen
-    const title = document.querySelector("#edit-todo-dialog #title");
-
   };
 
   handleCheckboxClick = (e) => {

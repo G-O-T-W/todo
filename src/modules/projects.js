@@ -44,4 +44,19 @@ export default class Project {
       }
     }
   }
+
+  editTodo(todoID, title, dscr, dueDate, priority) {
+    let editTodo;
+    for(const todo of this.todos){
+      if(todo.ID == todoID){
+        editTodo = todo;
+        break;
+      }
+    }
+    editTodo.title = title;
+    editTodo.dscr = dscr;
+    editTodo.dueDate = dueDate;
+    editTodo.priority = priority;
+
+  }
 }

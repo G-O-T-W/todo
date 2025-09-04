@@ -52,7 +52,6 @@ document.addEventListener("click", (e) => {
 });
 
 // Event Listeners for Create Todo
-
 document.addEventListener("click", (e) => {
   const createTodoDialog = document.querySelector("#create-todo-dialog");
 
@@ -65,14 +64,15 @@ document.addEventListener("click", (e) => {
 
   const cancelBtn = e.target.closest(
     '#create-todo-dialog input[type="button"]',
+
   );
   if (cancelBtn) {
     createTodoDialog.close();
   }
 });
 
-// Event Listener for form submission
 
+// Event Listener for create todo form submission
 const todoForm = document.querySelector("#create-todo-dialog form");
 todoForm.addEventListener("submit", () => {
   const formData = new FormData(todoForm); // this refers to the form element
