@@ -20,11 +20,14 @@ export default class Storage {
   }
 
   load() {
-    let projects = localStorage.getItem('projects');
-    projects = JSON.parse(projects);
-    const projectInstance = new Project();
-    projects.forEach((project) => {
-      Object.setPrototypeOf(project, projectInstance);
+    let json = localStorage.getItem('projects');
+    let projectsList = JSON.parse(json);
+    let projects = [];
+    projectsList.forEach((project) => {
+      const projectInstance = new Project(`${project.name}`);
+      projectInstance.ID = project.ID;
+      projectInstance.todos = project.todos;
+      projects.push(projectInstance);
     });
     return projects;
   }
