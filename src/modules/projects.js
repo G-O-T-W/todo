@@ -1,4 +1,4 @@
-import Todo from "./todos";
+import Todo from './todos';
 
 export default class Project {
   constructor(name) {
@@ -22,7 +22,7 @@ export default class Project {
           todo.title,
           todo.descr,
           todo.dueDate,
-          todo.priority,
+          todo.priority
         );
         // Insert duplicate todo after the original
         this.todos.splice(idx + 1, 0, duplicateTodo);
@@ -42,8 +42,8 @@ export default class Project {
 
   editTodo(todoID, title, dscr, dueDate, priority) {
     let editTodo;
-    for(const todo of this.todos){
-      if(todo.ID == todoID){
+    for (const todo of this.todos) {
+      if (todo.ID == todoID) {
         editTodo = todo;
         break;
       }
@@ -52,6 +52,5 @@ export default class Project {
     editTodo.dscr = dscr;
     editTodo.dueDate = dueDate;
     editTodo.priority = priority;
-
   }
 }

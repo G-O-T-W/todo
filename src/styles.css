@@ -1,3 +1,6 @@
+/* Font Imports */
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
+
 /* CSS Reset */
 
 *,
@@ -59,9 +62,6 @@ h6 {
   isolation: isolate;
 }
 
-/* Font Imports */
-@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap");
-
 /* Custom CSS */
 
 :root {
@@ -101,7 +101,7 @@ header h1 {
   text-align: center;
   color: var(--accent-color);
   font-size: 2.4rem;
-  font-family: "EB Garamond", monospace;
+  font-family: 'EB Garamond', monospace;
 }
 
 .create-todo {
@@ -340,7 +340,7 @@ footer p {
   align-items: start;
 }
 
-.checkbox-container input[type="checkbox"] {
+.checkbox-container input[type='checkbox'] {
   position: relative;
   top: 8px;
   appearance: none;
@@ -357,8 +357,8 @@ footer p {
   align-items: center;
 }
 
-.checkbox-container input[type="checkbox"]::before {
-  content: "";
+.checkbox-container input[type='checkbox']::before {
+  content: '';
   width: 0.8rem; /* Fixed width of inner circle */
   aspect-ratio: 1 /1; /* Fixed height of inner circle */
   transform: scale(0);
@@ -367,7 +367,7 @@ footer p {
   border-radius: 50%;
 }
 
-.checkbox-container input[type="checkbox"]:checked::before {
+.checkbox-container input[type='checkbox']:checked::before {
   transform: scale(1);
 }
 
@@ -448,7 +448,7 @@ footer p {
 
 #create-todo-dialog .content,
 #edit-todo-dialog .content,
-#rename-project-dialog .content{
+#rename-project-dialog .content {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -484,7 +484,7 @@ form textarea {
 }
 
 .form-input:has(:required) label::after {
-  content: "*";
+  content: '*';
   color: red;
   display: inline;
   margin-left: 3px;
@@ -507,7 +507,7 @@ form textarea {
   cursor: pointer;
 }
 
-input[type="submit"] {
+input[type='submit'] {
   background-color: var(--accent-color);
   color: var(--primary);
 }

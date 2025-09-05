@@ -56,21 +56,25 @@ The following features are currently under development:
 ### Installation
 
 1. Clone the repository
+
 ```bash
 git clone https://github.com/yourusername/todo.git
 ```
 
 2. Navigate to project directory
+
 ```bash
 cd todo
 ```
 
 3. Install dependencies
+
 ```bash
 npm install
 ```
 
 4. Start development server
+
 ```bash
 npm start
 ```
@@ -96,4 +100,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Acknowledgments
 
 - The Odin Project for project inspiration and guidance
-- Google Material Icons 
+- Google Material Icons

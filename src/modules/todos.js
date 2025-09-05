@@ -8,12 +8,6 @@ export default class Todo {
     this.isComplete = false;
   }
 
-  complete() {
-    // delete the todo from the project
-    this.title = "[Completed] " + title;
-    // isComplete = true;
-  }
-
   edit(title, dueDate = null, dscr = null, priority = null) {
     this.title = title;
     if (dueDate) this.dueDate = dueDate;
@@ -21,7 +15,5 @@ export default class Todo {
     if (priority) this.priority = priority;
   }
 
-  copy() {
-
-  }
+  copy() {}
 }
