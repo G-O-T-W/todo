@@ -1,21 +1,20 @@
 import Project from "./projects";
-import Todo from "./todos";
+import Storage from "./storage";
 
 export default class UI {
   constructor() {
-    this.projects = [];
-    const defaultProject = new Project("Default");
-    this.projects.push(defaultProject);
-    // delete
-    const todo = new Todo("Test", "test", "22-08-2025", "3");
-    defaultProject.addTodo(todo);
-    this.displayTodos(defaultProject.ID);
-
+    this.db = new Storage();
+    this.projects = this.db.load();
+    console.log(this.projects);
+    // this.projects[0].rename('Not Default');
+    this.displayTodos(this.projects[0].ID);
   }
 
   createProject(name) {
     const newProject = new Project(name);
     this.projects.push(newProject);
+    // update database
+    this.db.update(this.projects);
   }
 
   resetSidebar() {
@@ -29,7 +28,7 @@ export default class UI {
   loadProjects() {
     const projectsList = document.querySelector(".projects-list");
     // Display user created projectsList
-    for (const project of this.projects) {
+    for (const project of this.db.load()) {
       // Create a list item for project
       const li = document.createElement("li");
       li.setAttribute("project-id", project.ID);
@@ -109,6 +108,8 @@ export default class UI {
     for (const [idx, project] of this.projects.entries()) {
       if (project.ID == projectID) {
         this.projects.splice(idx, 1);
+        // update database
+        this.db.update(this.projects);
         break;
       }
     }
@@ -128,7 +129,10 @@ export default class UI {
   renameProject(name, projectID) {
     for (const project of this.projects) {
       if (project.ID == projectID){
+        console.log(project);
         project.rename(name);
+        // update database
+        this.db.update(this.projects);
       }
     }
   }
@@ -164,9 +168,12 @@ export default class UI {
     for (const project of this.projects) {
       if (project.ID == projID) {
         selectedProject = project;
+        break;
       }
     }
     selectedProject.addTodo(todo);
+    // update database
+    this.db.update(this.projects);
   }
 
   clearScreen() {
@@ -278,6 +285,60 @@ export default class UI {
     this.copyTodoOnScreen(todoID, projectID);
   };
 
+  copyTodoOnScreen(todoID, projID) {
+    for (const project of this.projects) {
+      if (project.ID == projID) {
+        project.copyTodo(todoID);
+        break;
+      }
+    }
+    this.db.update(this.projects);
+    this.displayTodos(projID);
+  }
+
+  handleCheckboxClick = (e) => {
+    const card = e.target.closest(".card");
+    const todoID = card.getAttribute("todo-id");
+    const projectID = card.getAttribute("project-id");
+    //  HACK: Using setTimeout to let the CSS :checked animation play
+    // before the DOM is updated or the element is removed.
+    // Without this delay, the checkbox visual effect wouldn't appear
+    // because the element is removed immediately.
+    // card.classList.add("removing");
+    // setTimeout(() => {
+    //   this.clearTodoOnScreen(todoID, projectID);
+    //   card.remove();
+    // }, 500);
+
+    // This is the more robust approach
+    // 1. Update the state
+    this.clearTodoOnScreen(todoID, projectID);
+
+    // 2. Trigger CSS animation
+    card.classList.add("removing"); // e.g., opacity/translate transition
+
+    // 3. Remove DOM element after transition ends
+    card.addEventListener(
+      "transitionend",
+      () => {
+        card.remove();
+      },
+      { once: true }, // ensures listener fires only once
+    );
+  };
+
+  clearTodoOnScreen(todoID, projID) {
+    for (const project of this.projects) {
+      if (project.ID == projID) {
+        project.completeTodo(todoID);
+        break;
+      }
+    }
+    // update database
+    this.db.update(this.projects);
+    this.displayTodos(projID);
+  }
+
   handleEditClick = (e) => {
     const card = e.target.closest(".card");
     const todoID = card.getAttribute("todo-id");
@@ -327,6 +388,8 @@ export default class UI {
       const date = formData.get("date");
       const priority = formData.get("priority");
       currentProject.editTodo(currentTodo.ID, title, description, date, priority);
+      // update database
+      this.db.update(this.projects);
       this.displayTodos(currentProject.ID);
     });
 
@@ -336,66 +399,4 @@ export default class UI {
     editTodoDialog.setAttribute('project-id', projectID);
     
   };
-
-  handleCheckboxClick = (e) => {
-    const card = e.target.closest(".card");
-    const todoID = card.getAttribute("todo-id");
-    const projectID = card.getAttribute("project-id");
-    //  HACK: Using setTimeout to let the CSS :checked animation play
-    // before the DOM is updated or the element is removed.
-    // Without this delay, the checkbox visual effect wouldn't appear
-    // because the element is removed immediately.
-    // card.classList.add("removing");
-    // setTimeout(() => {
-    //   this.clearTodoOnScreen(todoID, projectID);
-    //   card.remove();
-    // }, 500);
-
-    // This is the more robust approach
-    // 1. Update the state
-    this.clearTodoOnScreen(todoID, projectID);
-
-    // 2. Trigger CSS animation
-    card.classList.add("removing"); // e.g., opacity/translate transition
-
-    // 3. Remove DOM element after transition ends
-    card.addEventListener(
-      "transitionend",
-      () => {
-        card.remove();
-      },
-      { once: true }, // ensures listener fires only once
-    );
-  };
-
-  clearTodoOnScreen(todoID, projID) {
-    for (const project of this.projects) {
-      if (project.ID == projID) {
-        project.completeTodo(todoID);
-        break;
-      }
-    }
-  }
-
-  copyTodoOnScreen(todoID, projID) {
-    for (const project of this.projects) {
-      if (project.ID == projID) {
-        project.copyTodo(todoID);
-        break;
-      }
-    }
-    this.displayTodos(projID);
-  }
-
-  // display(project){
-  //     this.clearDisplay();
-  //     const title = document.querySelector('.main-content > h1');
-  //     title.textContent = project.name;
-
-  //     project.todos.forEach((todo) => {
-  //         const card = document.createElement('.div');
-  //         card.classList.add('card');
-
-  //     })
-  // }
 }

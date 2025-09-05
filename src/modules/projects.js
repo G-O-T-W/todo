@@ -15,12 +15,6 @@ export default class Project {
     this.name = name;
   }
 
-  delete() {
-    // delete all todos
-    this.todos = [];
-    // remove project from the menu
-  }
-
   copyTodo(todoID) {
     for (const [idx, todo] of this.todos.entries()) {
       if (todoID == todo.ID) {
@@ -41,6 +35,7 @@ export default class Project {
     for (const [idx, todo] of this.todos.entries()) {
       if (todoID == todo.ID) {
         this.todos.splice(idx, 1);
+        break;
       }
     }
   }

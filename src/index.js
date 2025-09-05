@@ -61,7 +61,6 @@ renameProjectForm.addEventListener('submit', () => {
   const projectID = renameProjectForm.getAttribute('project-id');
   const formData = new FormData(renameProjectForm);
   const newName = formData.get('new-name');
-  console.log(newName);
   ui.renameProject(newName, projectID);
   ui.updateSidebar();
 });
@@ -139,4 +138,5 @@ if (h2) {
   // This only works if the page is first rendered at start
   setProjectAsActive(h2.getAttribute("project-id"));
 }
+
 
